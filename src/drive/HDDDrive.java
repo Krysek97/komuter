@@ -1,0 +1,32 @@
+package drive;
+
+import file.File;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class HDDDrive implements Drive {
+
+    List<File> files = new ArrayList<>();
+    
+    @Override
+    public void addFile(File file) {
+        files.add(file);
+    }
+
+    @Override
+    public void listFile() {
+        for (File files : files) {
+            System.out.println(files.getName());
+        }
+    }
+
+    @Override
+    public File findFile(String name) {
+        Optional<File> foundFile = files.stream()
+                .filter(file -> file.getName().equals(name))
+                .findFirst();
+        return foundFile.orElseThrow();
+    }
+}

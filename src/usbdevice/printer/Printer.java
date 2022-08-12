@@ -2,7 +2,6 @@ package usbdevice.printer;
 
 import usbdevice.USBDevice;
 
-import javax.naming.NamingEnumeration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +34,9 @@ public class Printer implements USBDevice {
             additionalPaperSheets = scanner.nextInt();
             numberOfSheets = numberOfSheets + additionalPaperSheets;
         }
-        System.out.println("Starting printing.");
+        System.out.println("Starting printing " + this.numberOfPages + " pages.");
+        int sheetsRemain = this.numberOfSheets - this.numberOfPages;
+        System.out.println("In printer remain " + sheetsRemain + " sheets of paper.");
     }
 
     public void putCartridges() {
@@ -51,8 +52,22 @@ public class Printer implements USBDevice {
         for (int i = 1; i < 5; i++) {
             System.out.println("Insert " + orderNames.get(i) + " color");
             color = scanner.nextLine();
+            this.inks.add(new Ink(color));
         }
-        setPages();
+    }
+
+    public void print() {
+        this.putCartridges();
+        this.setPages();
+        for (int i = 1; i <= this.numberOfPages; i++) {
+            for (Ink ink : inks) {
+                ink.setLevel(ink.getLevel() - 1);
+            }
+        }
+        System.out.println("Inks level after printing");
+        for (Ink ink : inks) {
+            System.out.println(ink.getColor() + " : " + ink.getLevel());
+        }
     }
 
 
@@ -63,7 +78,7 @@ public class Printer implements USBDevice {
         wantPrinting = scanner.nextLine();
         printing = wantPrinting.equals("yes");
         if (printing) {
-            putCartridges();
+            this.print();
         }
         return true;
     }
@@ -76,6 +91,6 @@ public class Printer implements USBDevice {
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 }

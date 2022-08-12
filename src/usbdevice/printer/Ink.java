@@ -2,7 +2,7 @@ package usbdevice.printer;
 
 public class Ink {
     private String color;
-    private int capacity = 100;
+    private int level = 100;
 
     public Ink(String color) {
         this.color = color;
@@ -17,11 +17,11 @@ public class Ink {
         this.color = color;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getLevel() {
+        return level;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

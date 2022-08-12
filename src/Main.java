@@ -2,12 +2,14 @@ import drive.Drive;
 import drive.HDDDrive;
 import file.musicfile.MP3;
 import usbdevice.MemoryStick;
+import usbdevice.camera.Camera;
 import usbdevice.printer.Printer;
 
 public class Main {
     public static void main(String[] args) {
-        Printer printer = new Printer("mana");
+        Camera camera = new Camera("Lotka");
 
-        printer.connect();
+        camera.connect();
+
     }
 }

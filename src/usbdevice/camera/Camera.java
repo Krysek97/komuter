@@ -62,8 +62,8 @@ public class Camera implements USBDevice {
             case 5 -> this.resolutions.add(2 + "k Ultra HD");
         }
 
-        for (String resolution : resolutions) {
-            System.out.println("Staring recording. Currently resolution " + this.resolutions);
+        for (String resolution : this.resolutions) {
+            System.out.println("Staring recording. Currently resolution " + resolution);
         }
     }
 }
